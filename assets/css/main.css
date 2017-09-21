@@ -2,6 +2,8 @@ html, body { width: 100%; height: 100%; background: #fafafa; letter-spacing: 1px
 
 .container { padding-top: 5%; }
 
+h1 small { padding-left: 10px; padding-left: 0.625rem; font-size: 50%; }
+
 form { margin-top: 5%; }
 
 .github { display: inline-block; margin-left: 8px; margin-left: 0.5rem; font-size: 30px; font-size: 1.875rem; color: #6e5494; -webkit-transition: .5s; -o-transition: .5s; transition: .5s; }

@@ -1,7 +1,7 @@
 doctype
 
 block config
-  - var pageTitle = '計算字數 - by Sean Su'
+  - var pageTitle = '計算字數 Calculate the number of words - by Sean Su'
   - var description = '用vue.js寫的計算字數功能。把要計算的文字放在輸入框裡，就會統計總共有多少字。'
   - var fburl = 'https://sean-su.github.io/text-counter/'
   - var fbImg = 'https://sean-su.github.io/text-counter/assets/img/fb-share.png'
@@ -13,18 +13,20 @@ html
   = "\n"
   
   body
-    .container#app
-      .row
+    main.container#app
+      section.row
         .col
-          h1 計算字數
+          h1
+            | 計算字數
+            small Calculate the number of words
           p 用vue.js寫的計算字數功能。把要計算的文字放在輸入框裡，就會統計總共有多少字。
-      .row
+      section.row
         .col
           form
             .form-group
               label(for="txt") 請將文字貼於下方：
               textarea#txt.form-control(name="", cols="30", rows="10", v-model="txt", @input="counter")
-      .row
+      section.row
         .col
           .card.text-center
             .card-body.row
