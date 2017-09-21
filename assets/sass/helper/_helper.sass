@@ -1,0 +1,63 @@
+// lost
+%clearfix
+	lost-utility: clearfix
+
+
+
+
+
+// 單行省略
+=text-ellipsis
+	overflow: hidden
+	white-space: nowrap
+	text-overflow: ellipsis
+%text-ellipsis
+	+text-ellipsis
+
+// 多行省略
+=text-more-ellipsis
+	display: -webkit-box
+	-webkit-line-clamp: 2
+	-webkit-box-orient: vertical
+%text-more-ellipsis
+	+text-more-ellipsis
+
+// 不斷行
+=nowrap
+	white-space: nowrap
+%no-wrap
+	+nowrap
+
+
+
+
+
+// 超連結
+=hover
+	&:hover, &:focus
+		@content
+
+
+
+
+
+// 陰影
+=box-shadow-z1
+	box-shadow: $z1
+%box-shadow-z1
+	+box-shadow-z1
+
+=box-shadow-z2
+	box-shadow: $z2
+%box-shadow-z2
+	+box-shadow-z2
+
+=box-shadow-z3
+	box-shadow: $z3
+%box-shadow-z3
+	+box-shadow-z3
+
+=box-shadow-z4
+	box-shadow: $z4
+%box-shadow-z4
+	+box-shadow-z4

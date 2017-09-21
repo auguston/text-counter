@@ -1,0 +1,58 @@
+head
+  title=pageTitle
+
+  //- description 用 block prepend meta-tags
+  meta(
+    name="description"
+    content=description
+  )
+  link(rel="canonical", href=fburl)
+  meta(charset="utf-8")
+  meta(http-equiv="X-UA-Compatible", content="IE=edge, chrome=1")
+  meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui")
+
+  //- favicon
+  link(rel="shortcut icon", href="assets/img/favicon.ico")
+
+  //- chrome網址列顏色
+  meta(name="theme-color", content="#2196F3")
+
+  //- safari網址列顏色
+  meta(name="apple-mobile-web-app-status-bar-style", content="#2196F3")
+
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css")
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+
+  link(rel="stylesheet", href="assets/css/main.css")
+
+  = "\n"
+  = "\n"
+  = "\n"
+
+  //- fb
+  meta(property="og:url", content=fburl)
+  meta(property="og:site_name", content=pageTitle)
+  meta(property="og:title", content=pageTitle)
+  meta(property="og:description", content=description)
+  meta(property="og:image", content=fbImg)
+  meta(name="keywords", content=keywords)
+
+  = "\n"
+  = "\n"
+  = "\n"
+
+  <!--[if lte IE 9]>
+  //- 檢查是否支援html5
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js")
+  //- 讓 IE6 IE7 IE8 支援 HTML5 標籤
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js")
+  
+  = "\n"
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+  <![endif]-->
+
+  = "\n"
+  = "\n"
+  = "\n"
+
+  include _ga.html

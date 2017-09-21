@@ -1,0 +1,82 @@
+doctype
+
+block config
+  - var pageTitle = '計算字數 - by Sean Su'
+  - var description = '用vue.js寫的計算字數功能。把要計算的文字放在輸入框裡，就會統計總共有多少字。'
+  - var fburl = 'https://sean-su.github.io/text-counter/'
+  - var fbImg = 'https://sean-su.github.io/text-counter/assets/img/fb-share.png'
+  - var keywords = '計算字數, vue.js, text counter'
+
+html
+  include partials/_head
+
+  = "\n"
+  
+  body
+    .container#app
+      .row
+        .col
+          h1 計算字數
+          p 用vue.js寫的計算字數功能。把要計算的文字放在輸入框裡，就會統計總共有多少字。
+      .row
+        .col
+          form
+            .form-group
+              label(for="txt") 請將文字貼於下方：
+              textarea#txt.form-control(name="", cols="30", rows="10", v-model="txt", @input="counter")
+      .row
+        .col
+          .card.text-center
+            .card-body.row
+              .col-6.col-sm-3
+                p 數字字數
+                h2(v-text="num_counts")
+              .col-6.col-sm-3
+                p 英文字數
+                h2(v-text="en_counts")
+              .col-6.col-sm-3
+                p 中文字數
+                h2(v-text="ch_counts")
+              .col-6.col-sm-3
+                p.text-danger 總計字數(含標點符號)
+                h2.text-danger(v-text="counts")
+            .card-footer.text-muted
+              | 製作者：Sean Su
+              a.github(href="https://github.com/sean-su/text-counter")
+                i.fa.fa-github
+
+    //- js
+    script(src="https://code.jquery.com/jquery-3.1.1.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js")
+    script(src="assets/js/main.min.js")
+    script.
+      new Vue({
+        el: '#app',
+        data: {
+          txt: '', // 輸入的文字
+          t_nobreak: '', // 不算換行
+          num_counts_arr: [], // 數字字數的陣列
+          num_counts: [].length, // 數字字數
+          en_counts_arr: [], // 英文字數的陣列
+          en_counts: [].length, // 英文字數
+          ch_counts_arr: [], // 中文字數的陣列
+          ch_counts: [].length, // 中文字數
+          counts: 0 // 總數
+        },
+        methods: {
+          counter() {
+            this.t_nobreak = this.txt.replace(/\r\n|\n/g, '');
+
+            this.num_counts_arr = this.t_nobreak.match(/[0-9]/g) || [];
+            this.num_counts = this.num_counts_arr.length;
+
+            this.en_counts_arr = this.t_nobreak.match(/[a-zA-Z]/g) || [];
+            this.en_counts = this.en_counts_arr.length;
+
+            this.ch_counts_arr = this.t_nobreak.match(/[\u4E00-\u9FA5]/g) || [];
+            this.ch_counts = this.ch_counts_arr.length;
+
+            this.counts = this.t_nobreak.length;
+          }
+        }
+      });

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>計算字數 - by Sean Su</title>
+    <meta name="description" content="用vue.js寫的計算字數功能。把要計算的文字放在輸入框裡，就會統計總共有多少字。">
+    <link rel="canonical" href="https://sean-su.github.io/text-counter/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+    <link rel="shortcut icon" href="assets/img/favicon.ico">
+    <meta name="theme-color" content="#263238">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#263238">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+
+
+    <meta property="og:url" content="https://sean-su.github.io/text-counter/">
+    <meta property="og:site_name" content="計算字數 - by Sean Su">
+    <meta property="og:title" content="計算字數 - by Sean Su">
+    <meta property="og:description" content="用vue.js寫的計算字數功能。把要計算的文字放在輸入框裡，就會統計總共有多少字。">
+    <meta property="og:image" content="https://sean-su.github.io/text-counter/assets/img/fb-share.png">
+    <meta name="keywords" content="計算字數, vue.js, text counter">
+
+
+<!--[if lte IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+<![endif]-->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74398300-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+
+  <body>
+    <div class="container" id="app">
+      <div class="row">
+        <div class="col">
+          <h1>計算字數</h1>
+          <p>用vue.js寫的計算字數功能。把要計算的文字放在輸入框裡，就會統計總共有多少字。</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <form>
+            <div class="form-group">
+              <label for="txt">請將文字貼於下方：</label>
+              <textarea class="form-control" id="txt" name="" cols="30" rows="10" v-model="txt" @input="counter"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card text-center">
+            <div class="card-body row">
+              <div class="col-6 col-sm-3">
+                <p>數字字數</p>
+                <h2 v-text="num_counts"></h2>
+              </div>
+              <div class="col-6 col-sm-3">
+                <p>英文字數</p>
+                <h2 v-text="en_counts"></h2>
+              </div>
+              <div class="col-6 col-sm-3">
+                <p>中文字數</p>
+                <h2 v-text="ch_counts"></h2>
+              </div>
+              <div class="col-6 col-sm-3">
+                <p class="text-danger">總計字數(含標點符號)</p>
+                <h2 class="text-danger" v-text="counts"></h2>
+              </div>
+            </div>
+            <div class="card-footer text-muted">製作者：Sean Su<a class="github" href="https://github.com/sean-su/text-counter"><i class="fa fa-github"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js"></script>
+    <script src="assets/js/main.min.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          txt: '', // 輸入的文字
+          t_nobreak: '', // 不算換行
+          num_counts_arr: [], // 數字字數的陣列
+          num_counts: [].length, // 數字字數
+          en_counts_arr: [], // 英文字數的陣列
+          en_counts: [].length, // 英文字數
+          ch_counts_arr: [], // 中文字數的陣列
+          ch_counts: [].length, // 中文字數
+          counts: 0 // 總數
+        },
+        methods: {
+          counter() {
+            this.t_nobreak = this.txt.replace(/\r\n|\n/g, '');
+      
+            this.num_counts_arr = this.t_nobreak.match(/[0-9]/g) || [];
+            this.num_counts = this.num_counts_arr.length;
+      
+            this.en_counts_arr = this.t_nobreak.match(/[a-zA-Z]/g) || [];
+            this.en_counts = this.en_counts_arr.length;
+      
+            this.ch_counts_arr = this.t_nobreak.match(/[\u4E00-\u9FA5]/g) || [];
+            this.ch_counts = this.ch_counts_arr.length;
+      
+            this.counts = this.t_nobreak.length;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

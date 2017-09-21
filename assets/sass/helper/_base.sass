@@ -1,0 +1,79 @@
+// 內文、標題等的文字設定
+*, *::before, *::after
+	box-sizing: border-box
+
+html
+	-webkit-overflow-scrolling: touch
+
+// 中文
+@font-face
+  font-family: sans-serif
+  src: local("微軟正黑體"), local("Microsoft JhengHei"), local("MingLiU"), local("sans-serif")
+  unicode-range: U+4E00-9FFF
+
+// 英文
+@font-face
+  font-family: sans-serif
+  src: local("arial"), local("sans-serif")
+  unicode-range: U+00-024F
+
+body
+	background-color: $body-bg
+	vertical-align: middle
+	line-height: $line-height
+	font-family: sans-serif
+	letter-spacing: .08rem
+	font-weight: normal
+	color: $body-color
+
+
+
+
+
+// 設定超連結
+a
+	color: $a-link-color
+	+hover
+		color: $a-hover-color
+		text-decoration: none
+
+
+
+
+
+// 設定圖片
+figure
+	margin: 0
+img
+	vertical-align: middle
+
+// table設定
+table, th, tr, td
+	border: $table-border
+table
+	width: 100%
+th, td
+	padding: $table-padding-vertical $table-padding-horizontal
+th
+	text-align: center
+
+
+
+
+
+
+// hr設定
+hr
+	margin: 11px 2rem 12px
+	border: 0
+	border-top: 1px solid rgba(#CCC, $opacity-md)
+
+
+
+
+
+// 清除行動裝置點擊時的bug
+a, area,
+button, [role="button"], input, label, select,
+summary, textarea
+  touch-action: manipulation
