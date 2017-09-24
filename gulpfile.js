@@ -42,14 +42,7 @@ const gulp = require('gulp'),
 const src_Pug = './pug/*.pug',
 			end_Pug = './',
 			src_sass = ['./assets/sass/**/*.sass', './assets/sass/**/*.scss'],
-			end_Sass = './assets/css/',
-			// end_bundle = './assets/bundle/',
-			// src_mark = './*.md',
-			// end_mark = './',
-			// src_riot = './assets/riot/tag/*.tag',
-			// end_riot = './assets/riot/js/',
-			src_es6js = './assets/js/main.js',
-			end_es6js = './assets/js/';
+			end_Sass = './assets/css/';
 
 // webServer網址
 const serverSite = 'seansu.local';
@@ -114,76 +107,12 @@ gulp.task('styles', () => {
 		.pipe(gulp.dest(end_Sass));
 });
 
-// ES6
-gulp.task('es6', () => {
-  return browserify({
-		// 要編譯哪些檔案
-    entries: [src_es6js]
-  })
-    .transform(babelify.configure({
-      presets : ['es2015']
-    }))
-    .bundle()
-    // bundle 後的檔案名稱
-		.pipe(source('main.min.js'))
-		// 壓縮檔案
-		.pipe(buffer())
-		.pipe(uglify())
-		// bundle 完的檔案要放哪
-    .pipe(gulp.dest(end_es6js));
-});
-
-// 編譯riot.js
-// gulp.task('riot', () => {
-// 	gulp.src(src_riot)
-// 		.pipe(riot({
-// 			compact: true
-// 		}))
-// 		.pipe(gulp.dest(end_riot));
-// });
-
-
-// 合併、壓縮js檔案
-// gulp.task('bundle', () => {
-// 	return gulp.src('./bundle.config.js')
-// 		.pipe(bundle())
-// 		/*
-// 			想重新更名的話可以使用下列語法，但要記得 .js.map 的檔名要改
-// 			.pipe(rename(function(path) {
-// 				path.basename += "-multimedia.min";
-// 				path.extname = ".js";
-// 			}))
-// 		*/
-// 		.pipe(gulp.dest(end_bundle))
-// 		.pipe(notify({
-// 			message: 'Bundle Compily'
-// 		}));
-// });
-
-
-// markdown，需要時在拿掉註解
-// gulp.task('markdown', () => {
-//   return gulp.src(src_mark)
-//     .pipe(plumber({
-//       errorHandler: notify.onError("Error: <%= error.message %>")
-//     }))
-//     .pipe(markdown())
-//     .pipe(gulp.dest(end_mark))
-//     .pipe(notify({
-//       message: 'Markdown Success'
-//     }));
-// });
 
 
 // 監聽
 gulp.task('watch', () => {
-	// gulp.watch(['./assets/js/*.js', './assets/css/*.css'], ['clean']); // 每次都clean會花時間
 	gulp.watch(src_Pug, ['template']);
 	gulp.watch(src_sass, ['styles']);
-	gulp.watch('./assets/js/*.js', ['es6']);
-	// gulp.watch(src_riot, ['riot']);
-	// gulp.watch(['./bundle.config.js', './assets/js/*.js', './assets/css/*.css'], ['bundle']);
-	// gulp.watch(src_mark, ['markdown']);
 });
 
 
@@ -199,4 +128,4 @@ gulp.task('webServer', () => {
 
 
 // cmd輸入"gulp"時，要執行的task
-gulp.task('default', ['template', 'styles', 'es6', 'webServer', 'watch']);
+gulp.task('default', ['template', 'styles', 'webServer', 'watch']);
